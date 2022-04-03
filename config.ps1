@@ -7,30 +7,27 @@ $fontUri = "https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/Fir
 if ($IsWindows) {
     Write-Host "Detected platform - Windows"
     Write-Host "Installing Modules..."
-    [string[]]$items = Get-Content -Path './ps-modules.txt'
-    foreach ($i in $items) {
-        if (Get-InstalledModule -Name $i -ErrorAction:SilentlyContinue) {
-            Write-Host "module $i exists, skipping install"
-        }
-        else {
-            Write-Host "module $i does not exist, installing..."
-            Install-Module -Name $i -Scope CurrentUser -Force
+
+    $modules = Get-Content -Path './PowerShell/ps-modules.json' | ConvertFrom-Json
+    foreach ($i in $modules){
+        $name = $i.name
+        if (Get-InstalledModule -Name $name -ErrorAction:SilentlyContinue) {
+            Write-Host "module $name exists, skipping install"
+        } else {
+            Write-Host "module $name does not exist, installing..."
+            Install-Module -Name $name -Scope CurrentUser -Force
         }
     }
-
-    Write-Host "Installing Scripts..."
-    [string[]]$items = Get-Content -Path './ps-scripts.txt'
-    foreach ($i in $items) {
-        if (Get-InstalledScript -Name $i -ErrorAction:SilentlyContinue) {
-            Write-Host "script $i exists, skipping install"
-        }
-        else {
-            Write-Host "script $i does not exist, installing..."
-            Install-Script -Name $i -Force
+    $scripts = Get-Content -Path './PowerShell/ps-scripts.json' | ConvertFrom-Json
+    foreach ($i in $scripts){
+        $name = $i.name
+        if (Get-InstalledScript -Name $name -ErrorAction:SilentlyContinue) {
+            Write-Host "script $name exists, skipping install"
+        } else {
+            Write-Host "script $name does not exist, installing..."
+            Install-Script -Name $name -Force
         }
     }
-
-    Install-Script -Name pwshfetch-test-1
 
     Write-Host "Installing Fonts..."
     Invoke-WebRequest -Uri $fontUri -OutFile "./dlfont.zip"
@@ -51,7 +48,6 @@ if ($IsWindows) {
     Write-Host "cleaning up stuff..."
     Remove-Item dlfont.zip
     Remove-Item tempfonts -Recurse -Force
-
 
     Write-Host "Devicename Specific Dotfiles Setup"
     $hname = $env:computername | Select-Object

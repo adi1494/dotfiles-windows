@@ -1,0 +1,14 @@
+[
+    {
+        "name":"posh-git"
+    },
+    {
+        "name":"oh-my-posh"
+    },
+    {
+        "name":"Terminal-Icons"
+    },
+    {
+        "name":"PSReadLine"
+    }
+]
