@@ -53,6 +53,7 @@ if ($IsWindows) {
     $hname = $env:computername | Select-Object
     Write-Host "Creating symbolic links on $hname..."
     $gitconfigTarget = ""
+    # specific config (in case of multiple devices running same os)
     if ($hname -eq "POTATOLAPTOP") {
         $gitconfigTarget = "dotfiles/.gitconfig-pl"
     }
@@ -72,9 +73,9 @@ if ($IsWindows) {
 }
 
 if ($IsLinux) {
-    Write-Host "linux"
+    Write-Host "linux not supported yet"
 }
 
 if ($IsMacOs) {
-    Write-Host "macos"
+    Write-Host "macos not supported yet"
 }
