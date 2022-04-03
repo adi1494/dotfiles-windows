@@ -1,0 +1,5 @@
+[user]
+	username = vermarimo
+	email = 101869025+vermarimo@users.noreply.github.com
+[url "git@vermarimo.github.com"]
+	insteadOf = git@github.com

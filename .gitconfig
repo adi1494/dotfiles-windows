@@ -1,0 +1,23 @@
+# personal
+[user]
+	username = adi1494
+	email = 51172781+adi1494@users.noreply.github.com
+[url "git@adi1494.github.com:adi1494"]
+    insteadOf = git@github.com:adi1494
+
+# misc
+[includeIf "gitdir/i:~/programming/misc/"]
+    path = ~/dotfiles/.gitconfig-vermarimo
+
+# work
+[includeIf "gitdir/i:~/programming/work/"]
+    path = ~/dotfiles/.gitconfig-work
+
+
+# multiple github accounts + custom ssh hosts + git url aliases
+	# https://gist.github.com/saulbaizman/360d0eb1a01873356bd0348cf0ed9a69
+# multiple local git accounts + folder wise config + effective only after git init
+	# https://stackoverflow.com/questions/8801729/is-it-possible-to-have-different-git-configuration-for-different-projects
+
+[credential "https://gitlab.com"]
+	provider = generic
